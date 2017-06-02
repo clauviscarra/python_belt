@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Item Information</title>
+    {% load staticfiles %}
+      <link rel="stylesheet" href="{% static 'login_app/css/style.css' %}"media="screen" title="no title"  charset="utf-8">
+  </head>
+
+  <body>
+    <div class="teams-page">
+      <div class="teams-background">
+        <h1 class='message'>Hi, {{request.session.username}}!</h1>
+        {%for i in item_filter%}
+        <h2 class='info'> {{i.item}}</h2>
+        <!-- <p>Added by: {{i.created_by}}</p> -->
+
+        {%endfor%}
+
+        <h4>Users who added this product/item to their wish list</h4>
+        {%for i in users_of_item%}
+        <p>{{i.user.name}}</p>
+        {%endfor%}
+
+
+<hr>
+
+<a href="/items">Home</a> | <a href="/logout">Log Out</a>
+      </div>
+    </div>
+
+  </body>
+
+  </html>

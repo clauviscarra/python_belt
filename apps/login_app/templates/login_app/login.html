@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login </title>
+    {% load staticfiles %}
+      <link rel="stylesheet" href="{% static 'login_app/css/style.css' %}"media="screen" title="no title"  charset="utf-8">
+  </head>
+<body>
+  <div class="login-page">
+    <div class="form">
+    <form class="login-form" action="/login" method="post">{%csrf_token%}
+      <input type="text" placeholder="user name" name="username"/>
+      <input type="password" placeholder="password" name='password'/>
+      <input class = 'button'type="submit" name="submit" value="Log In">
+      <p class="message">Not registered? <a href="/register">Create an account</a></p>
+
+      {%if messages%}
+  {%for message in messages%}
+  <h3 class='message'>{{message}}</h3>
+  {%endfor%}
+{%endif%}
+    </form>
+    <br>
+
+    </div>
+  </div>
+</body>

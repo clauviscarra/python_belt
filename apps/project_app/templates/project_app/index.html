@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Wish List</title>
+    {% load staticfiles %}
+      <link rel="stylesheet" href="{% static 'login_app/css/style.css' %}"media="screen" title="no title"  charset="utf-8">
+  </head>
+
+  <body>
+    <div class="teams-page">
+      <div class="teams-background">
+        <h1 class='message'>Hi, {{request.session.username}}!</h1>
+
+        <h2 class='info'> Your Wish List</h2>
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Added by</th>
+    <th>Date Added</th>
+    <th>Action</th>
+  </tr>
+  {%for i in user_item%}
+
+      <tr>
+        <td><a href="wish_items/{{i.user_item_id}}">{{i.user_item.item}}</a></td>
+
+        <td>{{i.user_item.created_by}}</td>
+
+        <td>{{i.user_item.created_at}}</td>
+
+          {%if i.user_item.created_by == request.session.username %}
+
+        <td><a href="delete/{{i.user_item.id}}">Delete Item</a></td>
+          {%else%}
+        <td><a href="remove/{{i.user_item.id}}">Remove From My Wishlist</a></td>
+        {%endif%}
+      </tr>
+        {%endfor%}
+</table>
+
+        <h2 class='info'> Other User's Wish List</h2>
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Added by</th>
+    <th>Date Added</th>
+    <th>Action</th>
+  </tr>
+  {%for i in all_other_user_items%}
+
+      <tr>
+        <td><a href="wish_items/{{i.id}}">{{i.item}}</a></td>
+
+        <td>{{i.created_by}}</td>
+
+        <td>{{i.created_at}}</td>
+
+        <td><a  href="join/{{i.id}}">Add to My Wish list</a></td>
+      </tr>
+      {%endfor%}
+
+</table>
+<br>
+<form class="" action="add" method="post">{%csrf_token%}
+  <input class="button" type="submit" name="" value="Add Item">
+
+</form>
+<hr>
+<a href="/logout">Log Out</a>
+      </div>
+    </div>
+
+  </body>
+
+  </html>
